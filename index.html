@@ -3433,193 +3433,6 @@ iframe {
     }
 }
 
-
-
-/* =========================================================
-   GOOGLE MAPS / YANGO LOCATION CHOICE POPUP
-========================================================= */
-.location-choice-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.72);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    z-index: 99999;
-    backdrop-filter: blur(7px);
-}
-
-.location-choice-overlay.show {
-    display: flex;
-}
-
-/* App logos */
-.location-app-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex: 0 0 48px;
-    font-family: Arial, sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    box-shadow: 0 6px 16px rgba(0,0,0,.14);
-}
-.location-google-logo {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,.10);
-    position: relative;
-}
-.location-google-logo::before {
-    content: '';
-    width: 21px;
-    height: 21px;
-    border: 5px solid #4285F4;
-    border-right-color: #34A853;
-    border-bottom-color: #FBBC05;
-    border-left-color: #EA4335;
-    border-radius: 50% 50% 50% 8%;
-    transform: rotate(-45deg);
-}
-.location-yango-logo {
-    background: #111;
-    color: #fff;
-    letter-spacing: -2px;
-}
-.location-choice-content {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-align: left;
-}
-.location-choice-content strong {
-    display: block;
-    font-size: 1.05rem;
-    margin-bottom: 3px;
-}
-.location-choice-content small {
-    display: block;
-    font-size: .86rem;
-    opacity: .72;
-    font-weight: 500;
-}
-
-.location-choice-box {
-    width: min(420px, 100%);
-    background: #fff9f0;
-    border: 1px solid #d4af37;
-    border-radius: 22px;
-    padding: 28px 22px 22px;
-    text-align: center;
-    box-shadow: 0 25px 70px rgba(0,0,0,.45);
-    animation: locationChoiceIn .25s ease-out;
-}
-
-.location-choice-box h3 {
-    margin: 0 0 8px;
-    color: #5a3e2b;
-    font-size: 1.35rem;
-}
-
-.location-choice-box p {
-    margin: 0 0 22px;
-    color: #6b5a4d;
-    line-height: 1.5;
-}
-
-.location-choice-actions {
-    display: grid;
-    gap: 12px;
-}
-
-.location-choice-btn {
-    width: 100%;
-    min-height: 52px;
-    border: 0;
-    border-radius: 14px;
-    padding: 14px 18px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: transform .18s ease, box-shadow .18s ease;
-}
-
-.location-choice-btn:hover {
-    transform: translateY(-2px);
-}
-
-.location-choice-btn:active {
-    transform: translateY(0);
-}
-
-.location-google-btn {
-    background: #d4af37;
-    color: #2e241d;
-    box-shadow: 0 8px 20px rgba(212,175,55,.25);
-}
-
-.location-yango-btn {
-    background: #171717;
-    color: #fff;
-    box-shadow: 0 8px 20px rgba(0,0,0,.2);
-}
-
-.location-cancel-btn {
-    background: transparent;
-    color: #6b5a4d;
-    border: 1px solid rgba(90,62,43,.25);
-}
-
-@keyframes locationChoiceIn {
-    from {
-        opacity: 0;
-        transform: translateY(12px) scale(.97);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
-
-
-.location-choice-trigger {
-    display: inline-block;
-    width: auto;
-    max-width: 100%;
-    border: 1px solid #d4af37;
-    background: transparent;
-    color: #5a3e2b;
-    border-radius: 12px;
-    padding: 12px 18px;
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all .2s ease;
-}
-
-.location-choice-trigger:hover {
-    background: #d4af37;
-    color: #2e241d;
-    transform: translateY(-1px);
-}
-
-</style>
-<style>
-/* Yango's official widget supplies the real app/deep-link URL.
-   We keep its generated link styled like the invitation's button. */
-.yango-widget-holder {
-  display: none;
-}
-.yango-widget-holder.yango-widget-selected {
-  display: block;
-}
-.yango-widget-holder > a[data-link="true"] {
-  text-decoration: none;
-  box-sizing: border-box;
-}
 </style>
 </head>
 
@@ -3923,14 +3736,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <button
-                type="button"
-                class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA', 'Saint Anne Shifwankula', -15.311683285263316, 28.25936217490041)">
+            <a
+                href="https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA"
+                target="_blank"
+                rel="noopener noreferrer">
 
-                📍 Open Church Location
+                Open Church Location in Google Maps
 
-            </button>
+            </a>
         </p>
 
         <button
@@ -4000,14 +3813,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <button
-                type="button"
-                class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central', -15.416667, 28.283333)">
+            <a
+                href="https://maps.app.goo.gl/aBub4XiWLgoDPLsy6"
+                target="_blank"
+                rel="noopener noreferrer">
 
                 📍 VIEW PICTURE LOCATION
 
-            </button>
+            </a>
         </p>
 
         <button
@@ -4077,14 +3890,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <button
-                type="button"
-                class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central', -15.416667, 28.283333)">
+            <a
+                href="https://maps.app.goo.gl/aBub4XiWLgoDPLsy6"
+                target="_blank"
+                rel="noopener noreferrer">
 
                 📍 VIEW RECEPTION VENUE LOCATION
 
-            </button>
+            </a>
         </p>
 
         <button
@@ -5009,167 +4822,7 @@ setInterval(
 );
 
 
-
-
-/* =========================================================
-   LOCATION CHOICE — GOOGLE MAPS OR YANGO APP
-   Yango's official widget generates the app route link with
-   the destination already supplied to Yango.
-========================================================= */
-let selectedGoogleMapsLink = "";
-let selectedLocationName = "";
-let selectedYangoWidgetId = "";
-
-function openLocationChoice(googleMapsLink, locationName, latitude, longitude) {
-    selectedGoogleMapsLink = googleMapsLink || "";
-    selectedLocationName = locationName || "this location";
-
-    const overlay = document.getElementById("locationChoiceOverlay");
-    const title = document.getElementById("locationChoiceTitle");
-    const description = document.getElementById("locationChoiceDescription");
-    const googleButton = document.getElementById("googleMapsChoice");
-    const churchWidget = document.getElementById("yangoWidgetChurch");
-    const lusakaWidget = document.getElementById("yangoWidgetLusaka");
-
-    if (!overlay) return;
-
-    if (title) title.textContent = "Choose how to get to " + selectedLocationName;
-    if (description) {
-        description.textContent = "Open the exact location in Google Maps, or use Yango with the destination already selected.";
-    }
-
-    if (googleButton) {
-        googleButton.onclick = function () {
-            closeLocationChoice();
-            if (selectedGoogleMapsLink) {
-                window.location.href = selectedGoogleMapsLink;
-            }
-        };
-    }
-
-    // Saint Anne Shifwankula uses the church widget; both picture and
-    // reception locations use the Lusaka Central widget.
-    const isChurch = Math.abs(Number(latitude) - (-15.311683285263316)) < 0.000001 &&
-                     Math.abs(Number(longitude) - 28.25936217490041) < 0.000001;
-
-    selectedYangoWidgetId = isChurch ? "yangoWidgetChurch" : "yangoWidgetLusaka";
-
-    if (churchWidget) churchWidget.classList.toggle("yango-widget-selected", isChurch);
-    if (lusakaWidget) lusakaWidget.classList.toggle("yango-widget-selected", !isChurch);
-
-    overlay.classList.add("show");
-    document.body.style.overflow = "hidden";
-}
-
-function closeLocationChoice(event) {
-    if (event && event.target !== event.currentTarget) return;
-    const overlay = document.getElementById("locationChoiceOverlay");
-    if (overlay) overlay.classList.remove("show");
-    document.body.style.overflow = "";
-}
-
-document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") closeLocationChoice();
-});
 </script>
 
-
-
-<!-- =========================================================
-     LOCATION CHOICE POPUP
-========================================================= -->
-<div
-    class="location-choice-overlay"
-    id="locationChoiceOverlay"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="locationChoiceTitle"
-    onclick="closeLocationChoice(event)">
-
-    <div class="location-choice-box" onclick="event.stopPropagation()">
-
-        <h3 id="locationChoiceTitle">Open Location</h3>
-
-        <p id="locationChoiceDescription">
-            Choose how you want to get there.
-        </p>
-
-        <div class="location-choice-actions">
-
-            <button
-                type="button"
-                class="location-choice-btn location-google-btn"
-                id="googleMapsChoice" aria-label="Open this location in Google Maps">
-                <span class="location-choice-content">
-                    <span class="location-app-logo location-google-logo" aria-hidden="true"></span>
-                    <span>
-                        <strong>Google Maps</strong>
-                        <small>Open the exact location</small>
-                    </span>
-                </span>
-            </button>
-
-            <!-- The anchor below is generated by Yango's official widget. -->
-            <div id="yangoWidgetChurch"
-                 class="ya-taxi-widget yango-widget-holder"
-                 data-ref="jameschileshewedding"
-                 data-size="s"
-                 data-theme="normal"
-                 data-title="Yango"
-                 data-description="Saint Anne Shifwankula"
-                 data-use-location="true"
-                 data-app="2187871"
-                 data-lang="en"
-                 data-point-b="28.25936217490041,-15.311683285263316"
-                 data-custom-layout="true"
-                 data-proxy-url="https://yango.go.link/route?start-lat={start-lat}&start-lon={start-lon}&end-lat={end-lat}&end-lon={end-lon}&adj_adgroup=widget&ref={ref}&adj_t=vokme8e_nd9s9z9&lang=en&adj_deeplink_js=1&utm_source=widget&adj_fallback=https%3A%2F%2Fyango.com%2Fen_int%2Forder%2F%3Fgfrom%3D{start-lon}%2C{start-lat}%26gto%3D{end-lon}%2C{end-lat}%26ref%3D{ref}">
-                <a href="#" data-link="true" class="location-choice-btn location-yango-btn" aria-label="Open Yango with Saint Anne Shifwankula already selected">
-                    <span class="location-choice-content">
-                        <span class="location-app-logo location-yango-logo" aria-hidden="true">Y</span>
-                        <span>
-                            <strong>Yango</strong>
-                            <small>Destination already selected</small>
-                        </span>
-                    </span>
-                </a>
-            </div>
-
-            <div id="yangoWidgetLusaka"
-                 class="ya-taxi-widget yango-widget-holder"
-                 data-ref="jameschileshewedding"
-                 data-size="s"
-                 data-theme="normal"
-                 data-title="Yango"
-                 data-description="Lusaka Central"
-                 data-use-location="true"
-                 data-app="2187871"
-                 data-lang="en"
-                 data-point-b="28.283333,-15.416667"
-                 data-custom-layout="true"
-                 data-proxy-url="https://yango.go.link/route?start-lat={start-lat}&start-lon={start-lon}&end-lat={end-lat}&end-lon={end-lon}&adj_adgroup=widget&ref={ref}&adj_t=vokme8e_nd9s9z9&lang=en&adj_deeplink_js=1&utm_source=widget&adj_fallback=https%3A%2F%2Fyango.com%2Fen_int%2Forder%2F%3Fgfrom%3D{start-lon}%2C{start-lat}%26gto%3D{end-lon}%2C{end-lat}%26ref%3D{ref}">
-                <a href="#" data-link="true" class="location-choice-btn location-yango-btn" aria-label="Open Yango with Lusaka Central already selected">
-                    <span class="location-choice-content">
-                        <span class="location-app-logo location-yango-logo" aria-hidden="true">Y</span>
-                        <span>
-                            <strong>Yango</strong>
-                            <small>Destination already selected</small>
-                        </span>
-                    </span>
-                </a>
-            </div>
-
-            <button
-                type="button"
-                class="location-choice-btn location-cancel-btn"
-                onclick="closeLocationChoice()">
-                Cancel
-            </button>
-
-        </div>
-
-    </div>
-</div>
-
-<script src="//yastatic.net/taxi-widget/ya-taxi-widget.js" charset="UTF-8"></script>
 </body>
 </html>
