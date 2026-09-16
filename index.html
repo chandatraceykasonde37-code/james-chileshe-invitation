@@ -2500,109 +2500,6 @@ body {
 
 
 /* =========================================================
-   MAP CHOICE MODAL
-========================================================= */
-.location-choice-overlay {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background: rgba(35, 24, 18, .72);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 99999;
-}
-
-.location-choice-overlay.show {
-    display: flex;
-    animation: mapChoiceFade .25s ease;
-}
-
-.location-choice-card {
-    width: min(100%, 380px);
-    padding: 28px 22px 22px;
-    text-align: center;
-    background: linear-gradient(145deg, var(--ivory), var(--cream));
-    border: 1px solid var(--champagne);
-    border-radius: 22px;
-    box-shadow: 0 25px 70px rgba(0,0,0,.35);
-    position: relative;
-}
-
-.location-choice-card h3 {
-    margin: 0 0 8px;
-    font-family: 'Cinzel', serif;
-    color: var(--deep-chocolate);
-    font-size: 19px;
-    letter-spacing: 1px;
-}
-
-.location-choice-card p {
-    margin: 0 0 20px;
-    color: var(--chocolate);
-    font-size: 13px;
-}
-
-.location-choice-actions {
-    display: grid;
-    gap: 11px;
-}
-
-.location-choice-action {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 9px;
-    width: 100%;
-    min-height: 48px;
-    border: 1px solid var(--champagne);
-    border-radius: 14px;
-    text-decoration: none;
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: transform .2s ease, box-shadow .2s ease;
-}
-
-.location-choice-action:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--brown-shadow);
-}
-
-.location-choice-action.google {
-    background: #fff;
-    color: #3c4043;
-}
-
-.location-choice-action.yango {
-    background: #fff;
-    color: #111;
-}
-
-.location-choice-close {
-    position: absolute;
-    top: 9px;
-    right: 11px;
-    width: 34px;
-    height: 34px;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--chocolate);
-    font-size: 23px;
-    cursor: pointer;
-}
-
-@keyframes mapChoiceFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* =========================================================
    LUXURY POLISH
 ========================================================= */
 
@@ -3536,6 +3433,156 @@ iframe {
     }
 }
 
+
+
+/* =========================================================
+   GOOGLE MAPS / YANGO LOCATION CHOICE POPUP
+========================================================= */
+
+.location-choice-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: rgba(0, 0, 0, .68);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.location-choice-overlay.show {
+    display: flex;
+}
+
+.location-choice-box {
+    width: 100%;
+    max-width: 430px;
+    box-sizing: border-box;
+    background: var(--ivory);
+    border: 2px solid var(--champagne);
+    border-radius: 24px;
+    padding: 30px 22px 24px;
+    text-align: center;
+    box-shadow: 0 25px 70px rgba(0,0,0,.45);
+    animation: locationChoiceIn .35s ease;
+}
+
+.location-choice-title {
+    margin: 0 0 8px;
+    font-family: 'Cinzel', serif;
+    color: var(--deep-chocolate);
+    font-size: 20px;
+    line-height: 1.35;
+}
+
+.location-choice-text {
+    margin: 0 0 24px;
+    color: var(--chocolate);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.location-choice-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.location-choice-btn {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 15px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--champagne);
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.location-choice-btn:hover {
+    transform: translateY(-2px);
+}
+
+.location-choice-btn:active {
+    transform: scale(.97);
+}
+
+.google-location-btn {
+    background: linear-gradient(
+        135deg,
+        var(--deep-chocolate),
+        var(--chocolate)
+    );
+    color: var(--light-champagne);
+}
+
+.yango-location-btn {
+    background: linear-gradient(
+        135deg,
+        var(--deep-caramel),
+        var(--caramel)
+    );
+    color: var(--ivory);
+}
+
+.location-choice-close {
+    margin-top: 18px;
+    padding: 8px 18px;
+    background: transparent;
+    border: 0;
+    color: var(--chocolate);
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.location-choice-close:hover {
+    text-decoration: underline;
+}
+
+@keyframes locationChoiceIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 480px) {
+
+    .location-choice-overlay {
+        padding: 16px;
+    }
+
+    .location-choice-box {
+        padding: 26px 18px 22px;
+        border-radius: 20px;
+    }
+
+    .location-choice-title {
+        font-size: 17px;
+    }
+
+    .location-choice-btn {
+        padding: 14px 14px;
+        font-size: 11px;
+    }
+}
 </style>
 </head>
 
@@ -3839,14 +3886,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA"
-                target="_blank"
-                rel="noopener noreferrer">
+            <button
+                type="button"
+                class="location-map-button location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA')">
 
-                Open Church Location in Google Maps
+                📍 GET DIRECTIONS / BOOK A RIDE
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -3916,14 +3963,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="https://maps.app.goo.gl/aBub4XiWLgoDPLsy6"
-                target="_blank"
-                rel="noopener noreferrer">
+            <button
+                type="button"
+                class="location-map-button location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6')">
 
-                📍 VIEW PICTURE LOCATION
+                📍 GET DIRECTIONS / BOOK A RIDE
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -3993,14 +4040,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="https://maps.app.goo.gl/aBub4XiWLgoDPLsy6"
-                target="_blank"
-                rel="noopener noreferrer">
+            <button
+                type="button"
+                class="location-map-button location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6')">
 
-                📍 VIEW RECEPTION VENUE LOCATION
+                📍 GET DIRECTIONS / BOOK A RIDE
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -4570,64 +4617,7 @@ at four o’clock in the afternoon</p>
 </main>
 
 
-<!-- MAP APP CHOICE MODAL -->
-<div class="location-choice-overlay" id="locationChoiceOverlay" onclick="closeLocationChoices(event)">
-    <div class="location-choice-card" role="dialog" aria-modal="true" aria-labelledby="locationChoiceTitle">
-        <button type="button" class="location-choice-close" onclick="closeLocationChoices()" aria-label="Close">&times;</button>
-        <h3 id="locationChoiceTitle">Choose Your Map</h3>
-        <p id="locationChoiceDescription">Open this location using your preferred map app.</p>
-        <div class="location-choice-actions">
-            <a id="googleLocationLink" class="location-choice-action google" href="#" target="_blank" rel="noopener noreferrer">🗺️ GOOGLE MAPS</a>
-            <a id="yangoLocationLink" class="location-choice-action yango" href="#" target="_blank" rel="noopener noreferrer">📍 YANGO MAPS</a>
-        </div>
-    </div>
-</div>
-
 <script>
-const locationChoices = {
-    church: {
-        title: 'Marriage Blessing Location',
-        description: 'Saint Anne Shifwankula',
-        google: 'https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA',
-        yango: 'https://maps.yango.com/?text=-15.311683,28.259362&z=16'
-    },
-    picture: {
-        title: 'Picture Location',
-        description: 'Lusaka Central',
-        google: 'https://maps.app.goo.gl/aBub4XiWLgoDPLsy6',
-        yango: 'https://maps.yango.com/?text=Lusaka%20Central%2C%20Lusaka&z=14'
-    },
-    reception: {
-        title: 'Reception Location',
-        description: 'Lusaka Central',
-        google: 'https://maps.app.goo.gl/aBub4XiWLgoDPLsy6',
-        yango: 'https://maps.yango.com/?text=Lusaka%20Central%2C%20Lusaka&z=14'
-    }
-};
-
-function openLocationChoices(locationKey) {
-    const location = locationChoices[locationKey];
-    if (!location) return;
-
-    document.getElementById('locationChoiceTitle').textContent = location.title;
-    document.getElementById('locationChoiceDescription').textContent = location.description;
-    document.getElementById('googleLocationLink').href = location.google;
-    document.getElementById('yangoLocationLink').href = location.yango;
-    document.getElementById('locationChoiceOverlay').classList.add('show');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeLocationChoices(event) {
-    if (event && event.target !== document.getElementById('locationChoiceOverlay')) return;
-    document.getElementById('locationChoiceOverlay').classList.remove('show');
-    document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') closeLocationChoices();
-});
-
-
 
 
 /* =========================================================
@@ -4982,7 +4972,135 @@ setInterval(
 );
 
 
+
+
+/* =========================================================
+   GOOGLE MAPS / YANGO LOCATION CHOICE
+========================================================= */
+
+function openLocationChoice(googleLink) {
+
+    const overlay =
+        document.getElementById("locationChoiceOverlay");
+
+    const googleButton =
+        document.getElementById("locationGoogleLink");
+
+    if (!overlay || !googleButton) return;
+
+    googleButton.href = googleLink;
+
+    overlay.classList.add("show");
+
+    document.body.style.overflow = "hidden";
+}
+
+
+function closeLocationChoice(event) {
+
+    if (
+        event &&
+        event.target !== event.currentTarget
+    ) {
+        return;
+    }
+
+    const overlay =
+        document.getElementById("locationChoiceOverlay");
+
+    if (!overlay) return;
+
+    overlay.classList.remove("show");
+
+    document.body.style.overflow = "";
+}
+
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+
+        const overlay =
+            document.getElementById("locationChoiceOverlay");
+
+        if (overlay &&
+            overlay.classList.contains("show")) {
+
+            overlay.classList.remove("show");
+            document.body.style.overflow = "";
+
+        }
+
+    }
+
+});
 </script>
 
+
+
+<!-- =====================================================
+     GOOGLE MAPS / YANGO LOCATION CHOICE POPUP
+===================================================== -->
+
+<div
+    class="location-choice-overlay"
+    id="locationChoiceOverlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="locationChoiceTitle"
+    onclick="closeLocationChoice(event)">
+
+    <div
+        class="location-choice-box"
+        onclick="event.stopPropagation()">
+
+        <h2
+            class="location-choice-title"
+            id="locationChoiceTitle">
+            HOW WOULD YOU LIKE TO GET THERE?
+        </h2>
+
+        <p class="location-choice-text">
+            Choose Google Maps for directions or Yango
+            if you would like to book a ride.
+        </p>
+
+        <div class="location-choice-buttons">
+
+            <a
+                id="locationGoogleLink"
+                class="location-choice-btn google-location-btn"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                🗺️ OPEN GOOGLE MAPS
+
+            </a>
+
+            <a
+                class="location-choice-btn yango-location-btn"
+                href="https://yango.com/en_zm/city/lusaka/"
+                target="_blank"
+                rel="noopener noreferrer">
+
+                🚕 BOOK A YANGO
+
+            </a>
+
+        </div>
+
+        <button
+            type="button"
+            class="location-choice-close"
+            onclick="closeLocationChoice()">
+
+            CLOSE
+
+        </button>
+
+    </div>
+
+</div>
 </body>
 </html>
