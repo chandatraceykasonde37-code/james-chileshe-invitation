@@ -5035,7 +5035,7 @@ function openLocationChoice(googleMapsLink, locationName, latitude, longitude) {
 
     if (title) title.textContent = "Choose how to get to " + selectedLocationName;
     if (description) {
-        description.textContent = "Open the location in Google Maps, or open Yango with the destination already filled in.";
+        description.textContent = "Open the exact location in Google Maps, or open Yango with the destination already set for your ride.";
     }
 
     if (googleButton) {
@@ -5105,7 +5105,7 @@ document.addEventListener("keydown", function (event) {
             <button
                 type="button"
                 class="location-choice-btn location-google-btn"
-                id="googleMapsChoice">
+                id="googleMapsChoice" aria-label="Open this location in Google Maps">
                 <span class="location-choice-content">
                     <span class="location-app-logo location-google-logo" aria-hidden="true"></span>
                     <span>
@@ -5118,12 +5118,12 @@ document.addEventListener("keydown", function (event) {
             <button
                 type="button"
                 class="location-choice-btn location-yango-btn"
-                id="yangoChoice">
+                id="yangoChoice" aria-label="Open Yango with this destination already set">
                 <span class="location-choice-content">
                     <span class="location-app-logo location-yango-logo" aria-hidden="true">Y</span>
                     <span>
                         <strong>Yango</strong>
-                        <small>Open the ride with destination ready</small>
+                        <small>Open Yango with destination ready</small>
                     </span>
                 </span>
             </button>
