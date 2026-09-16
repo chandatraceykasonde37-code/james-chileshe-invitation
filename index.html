@@ -5004,19 +5004,36 @@ let selectedGoogleMapsLink = "";
 let selectedLocationName = "";
 let selectedYangoDestination = null;
 
-function buildYangoRouteLink(lat, lon) {
-    // Yango's official Universal Link format.
-    // If the Yango app is installed, the link opens the app with the
-    // destination already set. The guest then only needs to confirm/book.
-    const params = new URLSearchParams({
-        "end-lat": String(lat),
-        "end-lon": String(lon),
-        "ref": "jameschileshewedding",
-        "adj_t": "1",
-        "adj_deeplink_js": "1",
-        "lang": "en"
-    });
+function buildYangoRouteLink(endLat, endLon, startLat, startLon) {
+    const params = new URLSearchParams();
 
+    // Yango's documented route link supports the pickup point and destination.
+    // The pickup point is optional, but using the guest's current location
+    // makes the requested ride route explicit.
+    if (Number.isFinite(startLat) && Number.isFinite(startLon)) {
+        params.set("start-lat", String(startLat));
+        params.set("start-lon", String(startLon));
+    }
+
+    params.set("end-lat", String(endLat));
+    params.set("end-lon", String(endLon));
+    params.set("ref", "jameschileshewedding");
+    params.set("adj_t", "vokme8e_nd9s9z9");
+    params.set("lang", "en");
+    params.set("adj_deeplink_js", "1");
+
+    // Official Yango fallback. The destination remains included if the
+    // device cannot complete the app deep link.
+    const from = (Number.isFinite(startLat) && Number.isFinite(startLon))
+        ? String(startLon) + "," + String(startLat)
+        : "";
+    const to = String(endLon) + "," + String(endLat);
+    const fallback = "https://yango.com/en_int/order/?gfrom=" +
+        encodeURIComponent(from) +
+        "&gto=" + encodeURIComponent(to) +
+        "&ref=jameschileshewedding";
+
+    params.set("adj_fallback", fallback);
     return "https://yango.go.link/route?" + params.toString();
 }
 
@@ -5050,15 +5067,39 @@ function openLocationChoice(googleMapsLink, locationName, latitude, longitude) {
     if (yangoButton) {
         yangoButton.onclick = function () {
             if (!selectedYangoDestination) return;
-            const yangoUrl = buildYangoRouteLink(
-                selectedYangoDestination.lat,
-                selectedYangoDestination.lon
-            );
-            closeLocationChoice();
-            // This is Yango's app-opening Universal Link, not a yango.com URL.
-            // On supported phones with Yango installed, it opens the app and
-            // passes the destination to the ride screen.
-            window.location.href = yangoUrl;
+
+            const destination = selectedYangoDestination;
+
+            const openYango = function (startLat, startLon) {
+                const yangoUrl = buildYangoRouteLink(
+                    destination.lat,
+                    destination.lon,
+                    startLat,
+                    startLon
+                );
+                closeLocationChoice();
+                window.location.href = yangoUrl;
+            };
+
+            // Get the guest's current location so Yango receives both
+            // the pickup point and the wedding destination. If permission
+            // is denied, the destination is still sent to Yango.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        openYango(
+                            position.coords.latitude,
+                            position.coords.longitude
+                        );
+                    },
+                    function () {
+                        openYango(null, null);
+                    },
+                    { enableHighAccuracy: false, timeout: 8000, maximumAge: 60000 }
+                );
+            } else {
+                openYango(null, null);
+            }
         };
     }
 
