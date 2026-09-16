@@ -3436,20 +3436,18 @@ iframe {
 
 
 /* =========================================================
-   GOOGLE MAPS / YANGO LOCATION CHOOSER
+   GOOGLE MAPS / YANGO LOCATION CHOICE POPUP
 ========================================================= */
-
 .location-choice-overlay {
     position: fixed;
     inset: 0;
+    background: rgba(0, 0, 0, 0.72);
     display: none;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.72);
+    z-index: 99999;
     backdrop-filter: blur(7px);
-    -webkit-backdrop-filter: blur(7px);
-    z-index: 999999;
 }
 
 .location-choice-overlay.show {
@@ -3457,134 +3455,75 @@ iframe {
 }
 
 .location-choice-box {
-    position: relative;
-    width: min(100%, 430px);
-    padding: 34px 24px 25px;
+    width: min(420px, 100%);
+    background: #fff9f0;
+    border: 1px solid #d4af37;
+    border-radius: 22px;
+    padding: 28px 22px 22px;
     text-align: center;
-    background: var(--ivory, #FFF8ED);
-    border: 1px solid var(--champagne, #D5A84C);
-    border-radius: 24px;
-    box-shadow: 0 25px 70px rgba(0, 0, 0, .45);
-    animation: locationChoiceIn .3s ease-out;
+    box-shadow: 0 25px 70px rgba(0,0,0,.45);
+    animation: locationChoiceIn .25s ease-out;
 }
 
-.location-choice-close {
-    position: absolute;
-    top: 10px;
-    right: 12px;
-    width: 38px;
-    height: 38px;
-    border: 0;
-    border-radius: 50%;
-    background: transparent;
-    color: var(--deep-chocolate, #2D170E);
-    font-size: 28px;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.location-choice-pin {
-    font-size: 38px;
-    margin-bottom: 8px;
-}
-
-.location-choice-box h2 {
+.location-choice-box h3 {
     margin: 0 0 8px;
-    color: var(--deep-chocolate, #2D170E);
-    font-family: 'Cinzel', serif;
-    font-size: 20px;
-    letter-spacing: 1px;
+    color: #5a3e2b;
+    font-size: 1.35rem;
 }
 
-.location-choice-box > p {
-    margin: 0 auto 22px;
-    max-width: 320px;
-    color: var(--chocolate, #4A2819);
-    font-size: 14px;
-    line-height: 1.6;
+.location-choice-box p {
+    margin: 0 0 22px;
+    color: #6b5a4d;
+    line-height: 1.5;
 }
 
-.location-choice-options {
-    display: flex;
-    flex-direction: column;
+.location-choice-actions {
+    display: grid;
     gap: 12px;
 }
 
-.location-choice-option {
+.location-choice-btn {
     width: 100%;
-    min-height: 68px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 12px 17px;
-    border: 1px solid var(--champagne, #D5A84C);
-    border-radius: 17px;
-    text-decoration: none;
+    min-height: 52px;
+    border: 0;
+    border-radius: 14px;
+    padding: 14px 18px;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    text-align: left;
-    box-sizing: border-box;
-    transition: transform .2s ease, box-shadow .2s ease;
+    transition: transform .18s ease, box-shadow .18s ease;
 }
 
-.location-choice-option:hover {
+.location-choice-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 9px 24px rgba(0, 0, 0, .18);
 }
 
-.location-choice-option:active {
-    transform: scale(.98);
+.location-choice-btn:active {
+    transform: translateY(0);
 }
 
-.location-choice-option .choice-symbol {
-    width: 43px;
-    height: 43px;
-    flex: 0 0 43px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 22px;
-    background: rgba(255, 255, 255, .16);
+.location-google-btn {
+    background: #d4af37;
+    color: #2e241d;
+    box-shadow: 0 8px 20px rgba(212,175,55,.25);
 }
 
-.location-choice-option .choice-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+.location-yango-btn {
+    background: #171717;
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(0,0,0,.2);
 }
 
-.location-choice-option strong {
-    font-family: 'Cinzel', serif;
-    font-size: 13px;
-    letter-spacing: .7px;
-}
-
-.location-choice-option small {
-    font-size: 12px;
-    opacity: .86;
-}
-
-.location-choice-google {
-    color: var(--ivory, #FFF8ED);
-    background: linear-gradient(135deg, var(--deep-chocolate, #2D170E), var(--chocolate, #4A2819));
-}
-
-.location-choice-yango {
-    color: var(--ivory, #FFF8ED);
-    background: linear-gradient(135deg, var(--deep-caramel, #8A481F), var(--caramel, #B96F32));
-    font-family: inherit;
-}
-
-.location-choice-note {
-    margin: 17px 0 0 !important;
-    font-size: 11px !important;
-    opacity: .72;
+.location-cancel-btn {
+    background: transparent;
+    color: #6b5a4d;
+    border: 1px solid rgba(90,62,43,.25);
 }
 
 @keyframes locationChoiceIn {
     from {
         opacity: 0;
-        transform: translateY(18px) scale(.97);
+        transform: translateY(12px) scale(.97);
     }
     to {
         opacity: 1;
@@ -3592,22 +3531,28 @@ iframe {
     }
 }
 
-@media (max-width: 480px) {
-    .location-choice-overlay {
-        padding: 14px;
-    }
 
-    .location-choice-box {
-        padding: 30px 18px 21px;
-        border-radius: 21px;
-    }
+.location-choice-trigger {
+    display: inline-block;
+    width: auto;
+    max-width: 100%;
+    border: 1px solid #d4af37;
+    background: transparent;
+    color: #5a3e2b;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s ease;
 }
 
-
-
-body.location-choice-open {
-    overflow: hidden;
+.location-choice-trigger:hover {
+    background: #d4af37;
+    color: #2e241d;
+    transform: translateY(-1px);
 }
+
 </style>
 </head>
 
@@ -3911,13 +3856,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="javascript:void(0)"
-                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA'); return false;">
+            <button
+                type="button"
+                class="location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA', 'Saint Anne Shifwankula')">
 
-                Open Church Location
+                📍 Open Church Location
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -3987,13 +3933,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="javascript:void(0)"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6'); return false;">
+            <button
+                type="button"
+                class="location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central')">
 
                 📍 VIEW PICTURE LOCATION
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -4063,13 +4010,14 @@ at four o’clock in the afternoon</p>
         </p>
 
         <p>
-            <a
-                href="javascript:void(0)"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6'); return false;">
+            <button
+                type="button"
+                class="location-choice-trigger"
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central')">
 
                 📍 VIEW RECEPTION VENUE LOCATION
 
-            </a>
+            </button>
         </p>
 
         <button
@@ -4789,108 +4737,6 @@ function toggleContributionCard() {
 }
 
 
-
-
-/* =========================================================
-   GOOGLE MAPS / YANGO LOCATION CHOOSER
-========================================================= */
-
-let selectedGoogleMapsLocation = "";
-let locationChoiceTimer = null;
-
-function openLocationChoice(googleMapsUrl) {
-
-    const overlay =
-        document.getElementById("locationChoiceOverlay");
-
-    const googleMapsButton =
-        document.getElementById("googleMapsChoice");
-
-    if (!overlay || !googleMapsButton) return;
-
-    selectedGoogleMapsLocation = googleMapsUrl;
-    googleMapsButton.href = googleMapsUrl;
-
-    overlay.classList.add("show");
-
-    document.body.classList.add("location-choice-open");
-
-}
-
-function closeLocationChoice() {
-
-    const overlay =
-        document.getElementById("locationChoiceOverlay");
-
-    if (!overlay) return;
-
-    overlay.classList.remove("show");
-
-    document.body.classList.remove("location-choice-open");
-
-}
-
-function openYango() {
-
-    /*
-       Yango's public Zambia rider pages explain that riders
-       use the Yango app and enter/select their destination
-       inside the app. A public destination deep-link format
-       was not found, so this opens the app using its URL scheme
-       when supported and falls back to the official Zambia page.
-    */
-
-    const yangoAppUrl = "yango://";
-    const yangoFallbackUrl = "https://yango.com/en_zm/rider/";
-
-    closeLocationChoice();
-
-    let fallbackUsed = false;
-
-    locationChoiceTimer = setTimeout(function () {
-
-        if (document.visibilityState === "visible" && !fallbackUsed) {
-
-            fallbackUsed = true;
-
-            window.location.href = yangoFallbackUrl;
-
-        }
-
-    }, 1500);
-
-    window.location.href = yangoAppUrl;
-
-}
-
-/* Close the chooser when the user taps the dark background. */
-
-const locationChoiceOverlay =
-    document.getElementById("locationChoiceOverlay");
-
-if (locationChoiceOverlay) {
-
-    locationChoiceOverlay.addEventListener("click", function (event) {
-
-        if (event.target === locationChoiceOverlay) {
-            closeLocationChoice();
-        }
-
-    });
-
-}
-
-/* Close the chooser with the Escape key on desktop. */
-
-document.addEventListener("keydown", function (event) {
-
-    if (event.key === "Escape") {
-        closeLocationChoice();
-    }
-
-});
-
-
 /* =========================================================
    CHURCH LOCATION MAP
 ========================================================= */
@@ -5096,6 +4942,83 @@ setInterval(
 );
 
 
+
+
+/* =========================================================
+   LOCATION CHOICE — GOOGLE MAPS OR YANGO APP
+========================================================= */
+let selectedGoogleMapsLink = "";
+let selectedLocationName = "";
+
+function openLocationChoice(googleMapsLink, locationName) {
+
+    selectedGoogleMapsLink = googleMapsLink || "";
+    selectedLocationName = locationName || "this location";
+
+    const overlay = document.getElementById("locationChoiceOverlay");
+    const title = document.getElementById("locationChoiceTitle");
+    const description = document.getElementById("locationChoiceDescription");
+    const googleButton = document.getElementById("googleMapsChoice");
+
+    if (!overlay) return;
+
+    if (title) {
+        title.textContent = "Open " + selectedLocationName;
+    }
+
+    if (description) {
+        description.textContent =
+            "Choose Google Maps for directions or open the Yango app to request a ride.";
+    }
+
+    if (googleButton) {
+        googleButton.onclick = function () {
+            if (selectedGoogleMapsLink) {
+                window.open(selectedGoogleMapsLink, "_blank", "noopener,noreferrer");
+            }
+            closeLocationChoice();
+        };
+    }
+
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLocationChoice(event) {
+
+    if (event && event.target !== event.currentTarget) return;
+
+    const overlay = document.getElementById("locationChoiceOverlay");
+
+    if (overlay) {
+        overlay.classList.remove("show");
+    }
+
+    document.body.style.overflow = "";
+}
+
+function openYangoApp() {
+
+    /*
+       IMPORTANT:
+       This intentionally does NOT send the guest to yango.com.
+       It uses the Yango mobile-app URI scheme directly.
+       If Yango is installed, the phone should hand the link to the app.
+    */
+
+    closeLocationChoice();
+
+    const yangoAppUrl = "yango://";
+
+    window.location.href = yangoAppUrl;
+}
+
+document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+        closeLocationChoice();
+    }
+});
+
 </script>
 
 
@@ -5103,74 +5026,48 @@ setInterval(
 <!-- =========================================================
      LOCATION CHOICE POPUP
 ========================================================= -->
-
 <div
     class="location-choice-overlay"
     id="locationChoiceOverlay"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="locationChoiceTitle">
+    aria-labelledby="locationChoiceTitle"
+    onclick="closeLocationChoice(event)">
 
-    <div class="location-choice-box">
+    <div class="location-choice-box" onclick="event.stopPropagation()">
 
-        <button
-            type="button"
-            class="location-choice-close"
-            aria-label="Close location options"
-            onclick="closeLocationChoice()">
-            ×
-        </button>
+        <h3 id="locationChoiceTitle">Open Location</h3>
 
-        <div class="location-choice-pin">📍</div>
-
-        <h2 id="locationChoiceTitle">
-            OPEN LOCATION WITH
-        </h2>
-
-        <p>
-            Choose how you would like to get to this wedding location.
+        <p id="locationChoiceDescription">
+            Choose how you want to get there.
         </p>
 
-        <div class="location-choice-options">
-
-            <a
-                id="googleMapsChoice"
-                class="location-choice-option location-choice-google"
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer">
-
-                <span class="choice-symbol">🗺️</span>
-
-                <span class="choice-text">
-                    <strong>Google Maps</strong>
-                    <small>Open the location and get directions</small>
-                </span>
-
-            </a>
+        <div class="location-choice-actions">
 
             <button
                 type="button"
-                class="location-choice-option location-choice-yango"
-                onclick="openYango()">
+                class="location-choice-btn location-google-btn"
+                id="googleMapsChoice">
+                🗺️ Open in Google Maps
+            </button>
 
-                <span class="choice-symbol">🚕</span>
+            <button
+                type="button"
+                class="location-choice-btn location-yango-btn"
+                onclick="openYangoApp()">
+                🚕 Open Yango App
+            </button>
 
-                <span class="choice-text">
-                    <strong>Yango</strong>
-                    <small>Open Yango to book your ride</small>
-                </span>
-
+            <button
+                type="button"
+                class="location-choice-btn location-cancel-btn"
+                onclick="closeLocationChoice()">
+                Cancel
             </button>
 
         </div>
 
-        <p class="location-choice-note">
-            Already have the Yango app? Choose Yango to open it.
-        </p>
-
     </div>
-
 </div>
 
 </body>
