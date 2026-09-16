@@ -3454,6 +3454,59 @@ iframe {
     display: flex;
 }
 
+/* App logos */
+.location-app-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 48px;
+    font-family: Arial, sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.14);
+}
+.location-google-logo {
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.10);
+    position: relative;
+}
+.location-google-logo::before {
+    content: '';
+    width: 21px;
+    height: 21px;
+    border: 5px solid #4285F4;
+    border-right-color: #34A853;
+    border-bottom-color: #FBBC05;
+    border-left-color: #EA4335;
+    border-radius: 50% 50% 50% 8%;
+    transform: rotate(-45deg);
+}
+.location-yango-logo {
+    background: #111;
+    color: #fff;
+    letter-spacing: -2px;
+}
+.location-choice-content {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+}
+.location-choice-content strong {
+    display: block;
+    font-size: 1.05rem;
+    margin-bottom: 3px;
+}
+.location-choice-content small {
+    display: block;
+    font-size: .86rem;
+    opacity: .72;
+    font-weight: 500;
+}
+
 .location-choice-box {
     width: min(420px, 100%);
     background: #fff9f0;
@@ -3859,7 +3912,7 @@ at four o’clock in the afternoon</p>
             <button
                 type="button"
                 class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA', 'Saint Anne Shifwankula')">
+                onclick="openLocationChoice('https://maps.app.goo.gl/ePWg6XUdAjUn5CLaA', 'Saint Anne Shifwankula', -15.311683285263316, 28.25936217490041)">
 
                 📍 Open Church Location
 
@@ -3936,7 +3989,7 @@ at four o’clock in the afternoon</p>
             <button
                 type="button"
                 class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central')">
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central', -15.416667, 28.283333)">
 
                 📍 VIEW PICTURE LOCATION
 
@@ -4013,7 +4066,7 @@ at four o’clock in the afternoon</p>
             <button
                 type="button"
                 class="location-choice-trigger"
-                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central')">
+                onclick="openLocationChoice('https://maps.app.goo.gl/aBub4XiWLgoDPLsy6', 'Lusaka Central', -15.416667, 28.283333)">
 
                 📍 VIEW RECEPTION VENUE LOCATION
 
@@ -4949,34 +5002,63 @@ setInterval(
 ========================================================= */
 let selectedGoogleMapsLink = "";
 let selectedLocationName = "";
+let selectedYangoDestination = null;
 
-function openLocationChoice(googleMapsLink, locationName) {
+function buildYangoRouteLink(lat, lon) {
+    // Yango's official Universal Link format.
+    // If the Yango app is installed, the link opens the app with the
+    // destination already set. The guest then only needs to confirm/book.
+    const params = new URLSearchParams({
+        "end-lat": String(lat),
+        "end-lon": String(lon),
+        "ref": "jameschileshewedding",
+        "adj_t": "1",
+        "adj_deeplink_js": "1",
+        "lang": "en"
+    });
 
+    return "https://yango.go.link/route?" + params.toString();
+}
+
+function openLocationChoice(googleMapsLink, locationName, latitude, longitude) {
     selectedGoogleMapsLink = googleMapsLink || "";
     selectedLocationName = locationName || "this location";
+    selectedYangoDestination = { lat: latitude, lon: longitude };
 
     const overlay = document.getElementById("locationChoiceOverlay");
     const title = document.getElementById("locationChoiceTitle");
     const description = document.getElementById("locationChoiceDescription");
     const googleButton = document.getElementById("googleMapsChoice");
+    const yangoButton = document.getElementById("yangoChoice");
 
     if (!overlay) return;
 
-    if (title) {
-        title.textContent = "Open " + selectedLocationName;
-    }
-
+    if (title) title.textContent = "Choose how to get to " + selectedLocationName;
     if (description) {
-        description.textContent =
-            "Choose Google Maps for directions or open the Yango app to request a ride.";
+        description.textContent = "Open the location in Google Maps, or open Yango with the destination already filled in.";
     }
 
     if (googleButton) {
         googleButton.onclick = function () {
             if (selectedGoogleMapsLink) {
-                window.open(selectedGoogleMapsLink, "_blank", "noopener,noreferrer");
+                window.location.href = selectedGoogleMapsLink;
             }
             closeLocationChoice();
+        };
+    }
+
+    if (yangoButton) {
+        yangoButton.onclick = function () {
+            if (!selectedYangoDestination) return;
+            const yangoUrl = buildYangoRouteLink(
+                selectedYangoDestination.lat,
+                selectedYangoDestination.lon
+            );
+            closeLocationChoice();
+            // This is Yango's app-opening Universal Link, not a yango.com URL.
+            // On supported phones with Yango installed, it opens the app and
+            // passes the destination to the ride screen.
+            window.location.href = yangoUrl;
         };
     }
 
@@ -4985,38 +5067,14 @@ function openLocationChoice(googleMapsLink, locationName) {
 }
 
 function closeLocationChoice(event) {
-
     if (event && event.target !== event.currentTarget) return;
-
     const overlay = document.getElementById("locationChoiceOverlay");
-
-    if (overlay) {
-        overlay.classList.remove("show");
-    }
-
+    if (overlay) overlay.classList.remove("show");
     document.body.style.overflow = "";
 }
 
-function openYangoApp() {
-
-    /*
-       IMPORTANT:
-       This intentionally does NOT send the guest to yango.com.
-       It uses the Yango mobile-app URI scheme directly.
-       If Yango is installed, the phone should hand the link to the app.
-    */
-
-    closeLocationChoice();
-
-    const yangoAppUrl = "yango://";
-
-    window.location.href = yangoAppUrl;
-}
-
 document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-        closeLocationChoice();
-    }
+    if (event.key === "Escape") closeLocationChoice();
 });
 
 </script>
@@ -5048,14 +5106,26 @@ document.addEventListener("keydown", function (event) {
                 type="button"
                 class="location-choice-btn location-google-btn"
                 id="googleMapsChoice">
-                🗺️ Open in Google Maps
+                <span class="location-choice-content">
+                    <span class="location-app-logo location-google-logo" aria-hidden="true"></span>
+                    <span>
+                        <strong>Google Maps</strong>
+                        <small>Open the exact location</small>
+                    </span>
+                </span>
             </button>
 
             <button
                 type="button"
                 class="location-choice-btn location-yango-btn"
-                onclick="openYangoApp()">
-                🚕 Open Yango App
+                id="yangoChoice">
+                <span class="location-choice-content">
+                    <span class="location-app-logo location-yango-logo" aria-hidden="true">Y</span>
+                    <span>
+                        <strong>Yango</strong>
+                        <small>Open the ride with destination ready</small>
+                    </span>
+                </span>
             </button>
 
             <button
