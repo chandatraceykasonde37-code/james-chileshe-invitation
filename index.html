@@ -166,57 +166,6 @@ body {
       mix-blend-mode: multiply;
     }
 
-    .envelope-backdrop-decor {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .envelope-backdrop-decor::before {
-      content: "";
-      position: absolute;
-      width: min(92vw, 520px);
-      height: min(92vw, 520px);
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      border: 1px solid rgba(255,239,195,.26);
-      border-radius: 50%;
-      box-shadow: 0 0 0 18px rgba(255,239,195,.035), 0 0 80px rgba(255,224,151,.16);
-    }
-
-    .envelope-backdrop-decor::after {
-      content: "";
-      position: absolute;
-      inset: 7%;
-      border: 1px solid rgba(255,239,195,.13);
-      border-radius: 28px;
-    }
-
-    .decor-sparkle, .decor-leaf, .decor-branch {
-      position: absolute;
-      color: rgba(255,225,157,.78);
-      text-shadow: 0 0 16px rgba(255,224,151,.35);
-    }
-    .decor-sparkle { font-size: 18px; animation: royalTwinkle 3.5s ease-in-out infinite; }
-    .ds1 { top: 18%; left: 17%; }
-    .ds2 { top: 27%; right: 15%; animation-delay: .9s; }
-    .ds3 { bottom: 25%; left: 13%; animation-delay: 1.6s; }
-    .ds4 { bottom: 17%; right: 18%; animation-delay: 2.2s; }
-    .decor-leaf { font-size: 68px; opacity: .5; }
-    .decor-leaf-left { left: 5%; top: 43%; transform: rotate(-28deg); }
-    .decor-leaf-right { right: 5%; top: 43%; transform: scaleX(-1) rotate(-28deg); }
-    .decor-branch { font-size: 120px; opacity: .12; }
-    .decor-branch-left { left: -20px; bottom: 8%; transform: rotate(-35deg); }
-    .decor-branch-right { right: -20px; bottom: 8%; transform: scaleX(-1) rotate(-35deg); }
-
-    @keyframes royalTwinkle {
-      0%, 100% { opacity: .42; transform: scale(.85); }
-      50% { opacity: 1; transform: scale(1.18); }
-    }
-
     .invitation-shell {
       width: min(100%, 430px);
       aspect-ratio: .562 / 1;
@@ -267,24 +216,6 @@ body {
       background-size: auto, 5px 5px, auto;
     }
 
-    /* Subtle champagne celebration artwork behind the invitation wording */
-    .champagne-celebration-decor {
-      position: absolute;
-      z-index: 1;
-      width: min(78%, 285px);
-      right: -7%;
-      top: 8%;
-      opacity: .34;
-      pointer-events: none;
-      filter: drop-shadow(0 5px 10px rgba(100,65,22,.12));
-      transform: rotate(-2deg);
-    }
-    .champagne-celebration-decor svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
     /* Matching botanical corner artwork inside the opened invitation card */
     .card-botanical {
       position: absolute;
@@ -300,7 +231,7 @@ body {
     .card-botanical-tr { top: -5%; right: -5%; transform: scaleX(-1) rotate(-7deg); }
     .card-botanical-bl { bottom: -5%; left: -5%; transform: rotate(8deg); }
     .card-botanical-br { right: -5%; bottom: -5%; transform: scaleX(-1) rotate(8deg); }
-    .inner-card > :not(.card-botanical):not(.champagne-celebration-decor) { position: relative; z-index: 2; }
+    .inner-card > :not(.card-botanical) { position: relative; z-index: 2; }
 
     .inner-card::before,
     .inner-card::after {
@@ -3505,107 +3436,6 @@ iframe {
 
 
 /* =========================================================
-   ROYAL CERTIFICATE - BACKGROUND DECORATIONS
-   Decorative gold botanical/sparkle details sit behind the card only.
-========================================================= */
-.royal-certificate-section {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-}
-
-.royal-certificate-section::before,
-.royal-certificate-section::after {
-    content: '';
-    position: absolute;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Soft golden glow behind the certificate */
-.royal-certificate-section::before {
-    width: 620px;
-    height: 620px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -46%);
-    border-radius: 50%;
-    background:
-        radial-gradient(circle,
-            rgba(255,255,255,.38) 0%,
-            rgba(213,168,76,.16) 32%,
-            rgba(213,168,76,.06) 55%,
-            transparent 72%);
-    filter: blur(2px);
-}
-
-/* Elegant floating royal ornaments around the card */
-.royal-certificate-section::after {
-    inset: 0;
-    opacity: .48;
-    background-image:
-        radial-gradient(circle at 9% 24%, rgba(213,168,76,.65) 0 2px, transparent 3px),
-        radial-gradient(circle at 14% 76%, rgba(185,111,50,.45) 0 2px, transparent 3px),
-        radial-gradient(circle at 91% 25%, rgba(213,168,76,.65) 0 2px, transparent 3px),
-        radial-gradient(circle at 86% 78%, rgba(185,111,50,.45) 0 2px, transparent 3px),
-        radial-gradient(circle at 7% 50%, rgba(213,168,76,.35) 0 1.5px, transparent 2.5px),
-        radial-gradient(circle at 94% 52%, rgba(213,168,76,.35) 0 1.5px, transparent 2.5px);
-}
-
-.royal-certificate-section > * {
-    position: relative;
-    z-index: 1;
-}
-
-.royal-certificate-section .royal-certificate-wrap::before,
-.royal-certificate-section .royal-certificate-wrap::after {
-    position: absolute;
-    pointer-events: none;
-    z-index: -1;
-    color: rgba(165,96,38,.38);
-    font-family: Georgia, serif;
-    line-height: 1;
-}
-
-.royal-certificate-section .royal-certificate-wrap::before {
-    content: '❦';
-    left: -54px;
-    top: 14%;
-    font-size: 76px;
-    transform: rotate(-24deg);
-    text-shadow: 0 0 18px rgba(213,168,76,.18);
-}
-
-.royal-certificate-section .royal-certificate-wrap::after {
-    content: '❦';
-    right: -54px;
-    bottom: 13%;
-    font-size: 76px;
-    transform: rotate(24deg) scaleX(-1);
-    text-shadow: 0 0 18px rgba(213,168,76,.18);
-}
-
-@media (max-width: 700px) {
-    .royal-certificate-section::before {
-        width: 430px;
-        height: 430px;
-    }
-
-    .royal-certificate-section .royal-certificate-wrap::before {
-        left: -24px;
-        top: 12%;
-        font-size: 48px;
-    }
-
-    .royal-certificate-section .royal-certificate-wrap::after {
-        right: -24px;
-        bottom: 12%;
-        font-size: 48px;
-    }
-}
-
-
-/* =========================================================
    ROYAL CERTIFICATE - FINAL POLISH
    Keeps the original design/content while making the certificate
    cleaner, more readable and fully responsive.
@@ -3675,13 +3505,6 @@ iframe {
         min-height: 820px;
     }
 
-    .champagne-celebration-decor {
-        width: 72%;
-        right: -15%;
-        top: 6%;
-        opacity: .25;
-    }
-
     .royal-certificate-section .royal-front {
         padding: 42px 20px 48px;
     }
@@ -3723,45 +3546,8 @@ iframe {
 <div class="envelope-wrapper" id="envelopeWrapper">
 
 <div class="invitation-stage" aria-label="Interactive wedding invitation">
-
-   <!-- Soft royal decorations that sit BEHIND the envelope -->
-   <div class="envelope-backdrop-decor" aria-hidden="true">
-      <span class="decor-sparkle ds1">✦</span>
-      <span class="decor-sparkle ds2">✧</span>
-      <span class="decor-sparkle ds3">✦</span>
-      <span class="decor-sparkle ds4">✧</span>
-      <span class="decor-leaf decor-leaf-left">❧</span>
-      <span class="decor-leaf decor-leaf-right">❧</span>
-      <span class="decor-branch decor-branch-left">〰</span>
-      <span class="decor-branch decor-branch-right">〰</span>
-   </div>
-
    <section class="invitation-shell" id="invitation-shell" aria-label="Wedding envelope invitation">
     <article data-template-id="inner-invitation-card" class="inner-card canva-card" aria-hidden="true" style="background: rgb(216, 189, 145);">
-     <div class="champagne-celebration-decor" aria-hidden="true">
-       <svg viewBox="0 0 260 260" role="presentation">
-         <defs>
-           <linearGradient id="goldWine" x1="0" y1="0" x2="1" y2="1">
-             <stop offset="0" stop-color="#f7dfa2"/>
-             <stop offset=".5" stop-color="#d5a84c"/>
-             <stop offset="1" stop-color="#9b6425"/>
-           </linearGradient>
-         </defs>
-         <!-- stacked champagne coupes -->
-         <path d="M104 105h48l-7 20c-4 11-10 17-17 17s-13-6-17-17z" fill="rgba(255,248,224,.16)" stroke="url(#goldWine)" stroke-width="2"/>
-         <path d="M128 142v50M108 192h40" fill="none" stroke="url(#goldWine)" stroke-width="2" stroke-linecap="round"/>
-         <path d="M121 136h48l-7 20c-4 11-10 17-17 17s-13-6-17-17z" fill="rgba(255,248,224,.12)" stroke="url(#goldWine)" stroke-width="2"/>
-         <path d="M145 173v19M125 192h40" fill="none" stroke="url(#goldWine)" stroke-width="2" stroke-linecap="round"/>
-         <!-- champagne bottle -->
-         <path d="M202 33h18v17l7 8v25c0 5-4 9-9 9h-14c-5 0-9-4-9-9V58l7-8z" fill="rgba(75,55,27,.22)" stroke="url(#goldWine)" stroke-width="2"/>
-         <path d="M201 58h25M204 43h14" stroke="url(#goldWine)" stroke-width="2"/>
-         <!-- pouring stream -->
-         <path d="M210 92C199 110 187 120 174 128C162 135 157 142 157 151" fill="none" stroke="url(#goldWine)" stroke-width="3" stroke-linecap="round"/>
-         <path d="M208 93C198 111 185 121 172 129" fill="none" stroke="#f3d98f" stroke-width="1" stroke-linecap="round" opacity=".8"/>
-         <!-- falling droplets -->
-         <circle cx="158" cy="155" r="3" fill="#d5a84c"/><circle cx="153" cy="166" r="2.2" fill="#d5a84c"/><circle cx="149" cy="176" r="1.7" fill="#e7c77b"/>
-       </svg>
-     </div>
      <!-- Same botanical decorations as the envelope -->
      <svg class="card-botanical card-botanical-tl" viewBox="0 0 210 210" fill="none" aria-hidden="true"><path d="M5 195C49 169 56 117 93 78C124 45 162 34 204 7" stroke="currentColor" stroke-width="1.35"></path><g fill="rgba(160,115,52,.17)" stroke="currentColor" stroke-width=".8"><path d="M32 177C9 164 4 145 8 130c20 9 29 25 24 47Z"></path><path d="M45 157c-4-25 7-39 23-48 8 19 1 36-23 48Z"></path><path d="M52 133c-23 2-37-9-43-24 20-5 36 4 43 24Z"></path><path d="M68 112c-4-23 7-38 23-46 7 19 0 34-23 46Z"></path><path d="M80 92c-22 2-35-8-41-22 18-5 33 3 41 22Z"></path><path d="M99 74c-2-21 10-33 24-38 5 17-3 29-24 38Z"></path><path d="M115 58c-19 0-30-9-35-20 16-3 28 5 35 20Z"></path><path d="M137 45c1-17 11-27 23-30 2 14-6 24-23 30Z"></path><path d="M45 184c-19 7-34 1-43-12 16-8 31-5 43 12Z"></path><path d="M91 104c19-2 32 6 38 18-16 5-30-2-38-18Z"></path></g></svg>
      <svg class="card-botanical card-botanical-tr" viewBox="0 0 210 210" fill="none" aria-hidden="true"><path d="M5 195C49 169 56 117 93 78C124 45 162 34 204 7" stroke="currentColor" stroke-width="1.35"></path><g fill="rgba(160,115,52,.17)" stroke="currentColor" stroke-width=".8"><path d="M32 177C9 164 4 145 8 130c20 9 29 25 24 47Z"></path><path d="M45 157c-4-25 7-39 23-48 8 19 1 36-23 48Z"></path><path d="M52 133c-23 2-37-9-43-24 20-5 36 4 43 24Z"></path><path d="M68 112c-4-23 7-38 23-46 7 19 0 34-23 46Z"></path><path d="M80 92c-22 2-35-8-41-22 18-5 33 3 41 22Z"></path><path d="M99 74c-2-21 10-33 24-38 5 17-3 29-24 38Z"></path><path d="M115 58c-19 0-30-9-35-20 16-3 28 5 35 20Z"></path><path d="M137 45c1-17 11-27 23-30 2 14-6 24-23 30Z"></path><path d="M45 184c-19 7-34 1-43-12 16-8 31-5 43 12Z"></path><path d="M91 104c19-2 32 6 38 18-16 5-30-2-38-18Z"></path></g></svg>
@@ -4368,25 +4154,25 @@ at four o’clock in the afternoon</p>
 
                 <div class="royal-photo-grid">
 
-                    <div class="royal-photo-frame" style="--photo-bg: url('Image 8.jpeg');">
+                    <div class="royal-photo-frame" style="--photo-bg: url("Image 8.jpeg");">
                         <img
                             src="Image 8.jpeg"
                             alt="James and Chileshe memory one">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url('images9.jpeg');">
+                    <div class="royal-photo-frame" style="--photo-bg: url("images9.jpeg");">
                         <img
                             src="images9.jpeg"
                             alt="James and Chileshe memory two">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url('image4.jpg');">
+                    <div class="royal-photo-frame" style="--photo-bg: url("image4.jpg");">
                         <img
                             src="image4.jpg"
                             alt="James and Chileshe memory three">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url('image6.jpeg');">
+                    <div class="royal-photo-frame" style="--photo-bg: url("image6.jpeg");">
                         <img
                             src="image6.jpeg"
                             alt="James and Chileshe memory four">
@@ -4803,9 +4589,11 @@ if (shell && openEnvelope && envelopeWrapper && invitation) {
         const isOpen = shell.classList.toggle("is-open");
         openEnvelope.setAttribute("aria-expanded", String(isOpen));
         if (isOpen) {
-            envelopeWrapper.classList.add("hide");
-            invitation.classList.add("show");
-            window.scrollTo({ top: 0, behavior: "smooth" });
+            setTimeout(function () {
+                envelopeWrapper.classList.add("hide");
+                invitation.classList.add("show");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }, 1000);
         }
     });
     if (closeInvitation) {
