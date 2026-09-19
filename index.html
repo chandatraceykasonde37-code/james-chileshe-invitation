@@ -1812,7 +1812,7 @@ body {
             rgba(45,23,14,.30),
             rgba(45,23,14,.30)
         ),
-        url("image 01.jpg") center / cover no-repeat;
+        url("image 01.jpg") center / contain no-repeat;
 
     background-color:
         var(--deep-chocolate);
@@ -3433,105 +3433,6 @@ iframe {
     }
 }
 
-
-
-/* =========================================================
-   ROYAL CERTIFICATE - FINAL POLISH
-   Keeps the original design/content while making the certificate
-   cleaner, more readable and fully responsive.
-========================================================= */
-.royal-certificate-section .elegant-divider {
-    margin-bottom: 0;
-}
-
-.royal-certificate-section .royal-certificate-wrap {
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-.royal-certificate-section .royal-certificate,
-.royal-certificate-section .royal-face {
-    min-height: 820px;
-}
-
-/* Keep the entire photograph visible while the frame itself is filled.
-   The soft background prevents the old empty-looking gaps without cropping
-   the actual photograph. */
-.royal-photo-frame {
-    position: relative;
-    isolation: isolate;
-}
-
-.royal-photo-frame::before {
-    content: '';
-    position: absolute;
-    inset: 7px;
-    background-image: var(--photo-bg);
-    background-size: cover;
-    background-position: center;
-    filter: blur(14px);
-    transform: scale(1.04);
-    opacity: .55;
-    z-index: -1;
-}
-
-.royal-photo-frame img {
-    position: relative;
-    z-index: 1;
-    object-fit: contain;
-}
-
-.royal-turn-below {
-    margin: 14px auto 0;
-    padding: 8px 18px 0;
-    font-family: 'Cinzel', serif;
-    font-size: clamp(10px, 2.7vw, 14px);
-    letter-spacing: clamp(2px, .7vw, 4px);
-    color: var(--deep-caramel);
-    font-weight: 700;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,.45);
-}
-
-.royal-certificate-wrap:focus-visible {
-    outline: 2px solid var(--champagne);
-    outline-offset: 7px;
-    border-radius: 4px;
-}
-
-@media (max-width: 700px) {
-    .royal-certificate-section .royal-certificate,
-    .royal-certificate-section .royal-face {
-        min-height: 820px;
-    }
-
-    .royal-certificate-section .royal-front {
-        padding: 42px 20px 48px;
-    }
-
-    .royal-certificate-section .royal-back {
-        padding: 30px 15px 35px;
-    }
-
-    .royal-photo-grid {
-        gap: 9px;
-    }
-
-    .royal-photo-frame {
-        height: clamp(145px, 40vw, 190px);
-        padding: 6px;
-    }
-
-    .royal-photo-frame::before {
-        inset: 6px;
-    }
-
-    .royal-turn-below {
-        margin-top: 12px;
-        font-size: 10px;
-        letter-spacing: 2.5px;
-    }
-}
 </style>
 </head>
 
@@ -4154,25 +4055,25 @@ at four o’clock in the afternoon</p>
 
                 <div class="royal-photo-grid">
 
-                    <div class="royal-photo-frame" style="--photo-bg: url("Image 8.jpeg");">
+                    <div class="royal-photo-frame">
                         <img
                             src="Image 8.jpeg"
                             alt="James and Chileshe memory one">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url("images9.jpeg");">
+                    <div class="royal-photo-frame">
                         <img
                             src="images9.jpeg"
                             alt="James and Chileshe memory two">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url("image4.jpg");">
+                    <div class="royal-photo-frame">
                         <img
                             src="image4.jpg"
                             alt="James and Chileshe memory three">
                     </div>
 
-                    <div class="royal-photo-frame" style="--photo-bg: url("image6.jpeg");">
+                    <div class="royal-photo-frame">
                         <img
                             src="image6.jpeg"
                             alt="James and Chileshe memory four">
@@ -4193,11 +4094,6 @@ at four o’clock in the afternoon</p>
 
         </div>
 
-    </div>
-
-    <!-- Added below the certificate so guests know there are pictures behind it. -->
-    <div class="royal-turn-below">
-        TAP TO TURN
     </div>
 
 </section>
@@ -4622,16 +4518,7 @@ function turnRoyalCertificate() {
 
     if (!royalCertificate) return;
 
-    const isFlipped = royalCertificate.classList.toggle("flipped");
-    if (royalCertificateWrap) {
-        royalCertificateWrap.setAttribute("aria-pressed", String(isFlipped));
-        royalCertificateWrap.setAttribute(
-            "aria-label",
-            isFlipped
-                ? "Turn the Royal Wedding Certificate back to the front"
-                : "Turn the Royal Wedding Certificate to see the pictures"
-        );
-    }
+    royalCertificate.classList.toggle("flipped");
 }
 
 if (royalCertificateWrap && royalCertificate) {
