@@ -3709,144 +3709,7 @@ iframe {
         letter-spacing: 2.5px;
     }
 }
-
-/* Show the whole dress-code artwork instead of cropping its top/bottom. */
-.contribution-flip-card.flipped {
-    max-width: min(900px, 96vw);
-}
-
-.contribution-flip-card.flipped .contribution-flip-inner,
-.contribution-flip-card.flipped .contribution-front,
-.contribution-flip-card.flipped .contribution-back {
-    min-height: 680px;
-}
-
-.contribution-back {
-    background:
-        linear-gradient(rgba(45,23,14,.22), rgba(45,23,14,.22)),
-        url("image 01.jpg") center center / contain no-repeat;
-    background-color: var(--deep-chocolate);
-}
-@media (max-width: 700px) {
-
-    .contribution-flip-card.flipped .contribution-flip-inner,
-    .contribution-flip-card.flipped .contribution-front,
-    .contribution-flip-card.flipped .contribution-back {
-        min-height: 650px;
-    }
-
-    .contribution-back {
-        background-size: contain;
-    }
-
-    .contribution-back .dress-code-title {
-        font-size: 22px;
-        letter-spacing: 4px;
-    }
-}
-
-@media (max-width: 420px) {
-    .contribution-flip-card.flipped .contribution-flip-inner,
-    .contribution-flip-card.flipped .contribution-front,
-    .contribution-flip-card.flipped .contribution-back {
-        min-height: 620px;
-    }
-}
-
-/* =========================================================
-   FINAL DETAIL - CLEARER CHAMPAGNE GLASSES
-   The celebration artwork stays behind the invitation words.
-========================================================= */
-.champagne-celebration-decor {
-    width: min(92%, 360px);
-    left: 2%;
-    right: auto;
-    top: 34%;
-    opacity: .30;
-    z-index: 1;
-}
-
-.champagne-celebration-decor svg {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-@media (max-width: 700px) {
-    .champagne-celebration-decor {
-        width: 92%;
-        left: 0;
-        top: 38%;
-        opacity: .25;
-    }
-}
-
-@media (max-width: 420px) {
-    .champagne-celebration-decor {
-        width: 94%;
-        top: 39%;
-    }
-}
-
 </style>
-
-<style id="dress-code-matched-card-final">
-/* FINAL: opened invitation card follows the dress-code palette exactly.
-   Palette: ivory/white + beige + taupe + champagne gold. */
-.inner-card.canva-card {
-    background:
-        radial-gradient(circle at 50% 0%, rgba(255,255,255,.92), transparent 38%),
-        linear-gradient(145deg, #fffdf8 0%, #f7efe3 48%, #eadbc7 100%) !important;
-    border: 2px solid #d4af37 !important;
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.95),
-        inset 0 0 0 7px rgba(212,175,55,.13),
-        0 18px 45px rgba(90,62,43,.20) !important;
-}
-
-.inner-card.canva-card .card-kicker,
-.inner-card.canva-card .card-date,
-.inner-card.canva-card .card-close {
-    color: #6b5847 !important;
-}
-
-.inner-card.canva-card .card-title {
-    color: #5a3e2b !important;
-    text-shadow: 0 1px 0 rgba(255,255,255,.85);
-}
-
-.inner-card.canva-card .card-rule {
-    background: #d4af37 !important;
-    box-shadow: 0 0 0 1px rgba(255,255,255,.75);
-}
-
-.inner-card.canva-card .card-details {
-    color: #6b5847 !important;
-}
-
-.inner-card.canva-card::before,
-.inner-card.canva-card::after {
-    color: #b89a62 !important;
-}
-
-/* Keep the actual champagne-glass artwork, but make it harmonise with the
-   ivory/beige/taupe/champagne-gold dress-code theme. */
-.inner-card.canva-card .champagne-celebration-decor {
-    opacity: .25;
-    filter: sepia(.15) saturate(.8) drop-shadow(0 5px 10px rgba(90,62,43,.10));
-}
-
-@media (max-width: 700px) {
-    .inner-card.canva-card {
-        border-width: 2px !important;
-        box-shadow:
-            inset 0 0 0 1px rgba(255,255,255,.95),
-            inset 0 0 0 5px rgba(212,175,55,.12),
-            0 12px 30px rgba(90,62,43,.18) !important;
-    }
-}
-</style>
-
 </head>
 
 
@@ -3876,54 +3739,27 @@ iframe {
    <section class="invitation-shell" id="invitation-shell" aria-label="Wedding envelope invitation">
     <article data-template-id="inner-invitation-card" class="inner-card canva-card" aria-hidden="true" style="background: rgb(216, 189, 145);">
      <div class="champagne-celebration-decor" aria-hidden="true">
-       <svg viewBox="0 0 360 300" role="presentation">
+       <svg viewBox="0 0 260 260" role="presentation">
          <defs>
-           <linearGradient id="glassGold" x1="0" y1="0" x2="1" y2="1">
-             <stop offset="0" stop-color="#fff4c9"/>
-             <stop offset=".45" stop-color="#d5a84c"/>
+           <linearGradient id="goldWine" x1="0" y1="0" x2="1" y2="1">
+             <stop offset="0" stop-color="#f7dfa2"/>
+             <stop offset=".5" stop-color="#d5a84c"/>
              <stop offset="1" stop-color="#9b6425"/>
            </linearGradient>
-           <linearGradient id="liquidGold" x1="0" y1="0" x2="0" y2="1">
-             <stop offset="0" stop-color="#f8dfa0"/>
-             <stop offset="1" stop-color="#c68a2e"/>
-           </linearGradient>
          </defs>
-
-         <!-- Two clearly visible champagne flutes -->
-         <g stroke="url(#glassGold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-           <!-- left flute -->
-           <path d="M72 116 H150 L142 151 C139 164 130 173 111 173 C92 173 83 164 80 151 Z" fill="rgba(255,250,232,.22)"/>
-           <path d="M82 151 H140" fill="none"/>
-           <path d="M111 173 V249" fill="none"/>
-           <path d="M77 249 H145" fill="none"/>
-           <!-- right flute -->
-           <path d="M154 101 H232 L224 136 C221 149 212 158 193 158 C174 158 165 149 162 136 Z" fill="rgba(255,250,232,.22)"/>
-           <path d="M164 136 H222" fill="none"/>
-           <path d="M193 158 V249" fill="none"/>
-           <path d="M159 249 H227" fill="none"/>
-         </g>
-
-         <!-- champagne inside the bowls -->
-         <path d="M80 151 H140 C137 163 128 169 110 169 C93 169 84 163 80 151Z" fill="url(#liquidGold)" opacity=".72"/>
-         <path d="M162 136 H222 C219 147 210 154 192 154 C175 154 166 147 162 136Z" fill="url(#liquidGold)" opacity=".72"/>
-
-         <!-- elegant bubbles -->
-         <g fill="#f6dc92" opacity=".9">
-           <circle cx="101" cy="157" r="2.4"/><circle cx="119" cy="161" r="1.8"/><circle cx="128" cy="154" r="2"/>
-           <circle cx="183" cy="143" r="2.2"/><circle cx="201" cy="147" r="1.8"/><circle cx="211" cy="139" r="2.1"/>
-         </g>
-
-         <!-- tilted champagne bottle -->
-         <g transform="translate(246 22) rotate(25 30 45)">
-           <path d="M22 8 H48 V27 L56 36 V72 C56 78 52 82 46 82 H24 C18 82 14 78 14 72 V36 L22 27Z" fill="rgba(72,55,28,.28)" stroke="url(#glassGold)" stroke-width="3"/>
-           <path d="M17 38 H53 M22 17 H48" fill="none" stroke="url(#glassGold)" stroke-width="3"/>
-           <rect x="21" y="48" width="28" height="16" rx="2" fill="rgba(255,231,163,.24)" stroke="url(#glassGold)" stroke-width="2"/>
-         </g>
-
-         <!-- visible pouring stream -->
-         <path d="M281 88 C268 111 254 127 238 138 C224 147 216 156 214 173" fill="none" stroke="#d5a84c" stroke-width="5" stroke-linecap="round"/>
-         <path d="M281 88 C268 111 254 127 238 138 C224 147 218 157 217 169" fill="none" stroke="#f8e5ae" stroke-width="2" stroke-linecap="round"/>
-         <circle cx="214" cy="180" r="4" fill="#d5a84c"/><circle cx="210" cy="193" r="3" fill="#e7c77b"/>
+         <!-- stacked champagne coupes -->
+         <path d="M104 105h48l-7 20c-4 11-10 17-17 17s-13-6-17-17z" fill="rgba(255,248,224,.16)" stroke="url(#goldWine)" stroke-width="2"/>
+         <path d="M128 142v50M108 192h40" fill="none" stroke="url(#goldWine)" stroke-width="2" stroke-linecap="round"/>
+         <path d="M121 136h48l-7 20c-4 11-10 17-17 17s-13-6-17-17z" fill="rgba(255,248,224,.12)" stroke="url(#goldWine)" stroke-width="2"/>
+         <path d="M145 173v19M125 192h40" fill="none" stroke="url(#goldWine)" stroke-width="2" stroke-linecap="round"/>
+         <!-- champagne bottle -->
+         <path d="M202 33h18v17l7 8v25c0 5-4 9-9 9h-14c-5 0-9-4-9-9V58l7-8z" fill="rgba(75,55,27,.22)" stroke="url(#goldWine)" stroke-width="2"/>
+         <path d="M201 58h25M204 43h14" stroke="url(#goldWine)" stroke-width="2"/>
+         <!-- pouring stream -->
+         <path d="M210 92C199 110 187 120 174 128C162 135 157 142 157 151" fill="none" stroke="url(#goldWine)" stroke-width="3" stroke-linecap="round"/>
+         <path d="M208 93C198 111 185 121 172 129" fill="none" stroke="#f3d98f" stroke-width="1" stroke-linecap="round" opacity=".8"/>
+         <!-- falling droplets -->
+         <circle cx="158" cy="155" r="3" fill="#d5a84c"/><circle cx="153" cy="166" r="2.2" fill="#d5a84c"/><circle cx="149" cy="176" r="1.7" fill="#e7c77b"/>
        </svg>
      </div>
      <!-- Same botanical decorations as the envelope -->
